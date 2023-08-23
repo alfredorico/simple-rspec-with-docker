@@ -1,0 +1,23 @@
+version: '3.9'
+services:
+  ruby:
+    image: testing-rspec
+    build: 
+      context: .
+      args:
+        - "UID=${UID:-1000}"
+        - "GID=${GID:-1000}"        
+    volumes:
+      - ".:/app"
+
+# Building the image:
+# UID=$(id -u) GID=$(id -g) docker-compose build --no-cache 
+# NOTES:
+# The Gemfile.lock will not be present until you add a new gem to the Gemfile (after the initial image build)
+
+# Run ruby commands:
+# To start a ruby shell
+# docker-compose run --rm ruby irb
+
+# To run a ruby command like rspec
+# docker-compose run --rm ruby rspec
